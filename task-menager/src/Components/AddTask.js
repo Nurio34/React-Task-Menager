@@ -1,18 +1,16 @@
+import { useState } from "react"
 import Button from "./Button"
 
 
-const AddTask = () => {
+const AddTask = ({onAdd}) => {
 
-  //TODO BURDA KALDIM
-  const AddTask = () => {
-    const [text,setText] = useState("")
-    const [day,setDay] = useState("")
-    const [reminder,setReminder] = useState(false)
-  }
+  const [text,setText] = useState("")
+  const [day,setDay] = useState("")
+  const [reminder,setReminder] = useState(false)
 
   return (
 
-    <form className="grid gap-1">
+    <form className="grid gap-1" onSubmit={onAdd}>
 
         <div className=" flex justify-between items-center">
             <label>Task</label>
@@ -38,7 +36,7 @@ const AddTask = () => {
         <Button 
           text="Save" 
           colors={"bg-red-500 text-white justify-self-center"}
-          onClick={addTask}
+          // onClick={addTask}
         />
 
     </form>

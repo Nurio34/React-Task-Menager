@@ -39,6 +39,11 @@ function App() {
     )
   }
 
+  const addTask = (e) => {
+    e.preventDefault()
+    console.log("submt");
+
+  }
  
 
   return (
@@ -46,7 +51,7 @@ function App() {
 
       <Header title={"Task Menager"}/>
 
-      <AddTask onAdd={AddTask}/>
+      <AddTask onAdd={addTask}/>
 
       {tasks.length > 0 ? 
 
