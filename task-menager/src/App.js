@@ -1,68 +1,56 @@
 
-import { useState } from "react";
+import React,{useEffect, useState} from "react"
 import Header from "./Components/Header";
+import TaskForm from "./Components/TaskForm";
+import axios from "axios"
 import Tasks from "./Components/Tasks";
-import AddTask from "./Components/AddTask";
+
 
 function App() {
 
-  const [tasks,setTasks] = useState([
-    {
-        id : 1,
-        text : "Doctor Appoinment",
-        day : "Feb 5th at 2.30pm",
-        reminder : true
-    },
-    {
-        id : 2,
-        text : "Galey Appoinment",
-        day : "Feb 6th at 3.30pm",
-        reminder : false
-    },
-    {
-        id : 3,
-        text : "Girlfirend Appoinment",
-        day : "Feb 7th at 4.30pm",
-        reminder : false
+  const [isShowForm, setisShowForm] = useState(true)
+
+    const showForm = () =>{      
+      setisShowForm(!isShowForm)
+              
     }
-])
 
-  const deleteTask = (id) => {
-    setTasks(
-      tasks.filter((task) => task.id !== id )
-    )
-  }
+  const [tasks,setTasks] = useState([])
 
-  const toggleReminder = (id) => {
-    setTasks(
-      tasks.map((task) => task.id === id ? {...task,reminder: !task.reminder} : task )
-    )
-  }
+    const Get_Tasks_DB = async() => {
+      const res = await axios.get("http://localhost:5000/tasks")
+      const data = await res.data
+        return data
+    }
 
-  const addTask = (e) => {
-    e.preventDefault()
-    console.log("submt");
+    const Add_Task = async(newTask) => {
+      try {
+        const res = await axios.post("http://localhost:5000/tasks",newTask)
+        const data = await res.data          
 
-  }
- 
+      } catch (error) { 
+
+      }      
+    }
+
+    // useEffect(()=> {
+    //   const tasks = async()=> {
+    //     const data = await Get_Tasks_DB()
+    //     setTasks(data)
+    //   }
+    //   tasks()
+    // },[])
+    // console.log(tasks);
+
 
   return (
-    <div className="container border-2 border-blue-400 p-4">
-
-      <Header title={"Task Menager"}/>
-
-      <AddTask onAdd={addTask}/>
-
-      {tasks.length > 0 ? 
-
-        <Tasks 
-          tasks={tasks} 
-          onDelete={deleteTask} 
-          onToggle={toggleReminder}/>
-
-         : "No tasks"
-      }
-
+    <div className="App grid gap-4">
+      <Header 
+        btnText={isShowForm ? "Close" : "Add"}
+        colors={isShowForm ? "text-white bg-red-500" : "text-white bg-green-400"}
+        onClick={showForm}/>
+      {isShowForm && <TaskForm onSubmit={Add_Task} />}
+      <Tasks tasks={tasks}/>
     </div>
   );
 }

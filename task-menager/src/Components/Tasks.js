@@ -1,15 +1,16 @@
+import React from 'react'
+import Task from './Task'
 
-import Task from "./Task"
-
-const Tasks = ({tasks,onDelete,onToggle}) => {
-
-    return (
-    <div className=" grid gap-1 py-2">
-        {tasks.map((task)=>(
-            <Task key={task.id} task={task} onDelete={onDelete} onToggle={onToggle} />
-        ))}
-    </div>
-  )
+const Tasks = ({tasks}) => {
+    console.log(tasks);
+//   return (
+    
+//     <div>
+//         {tasks.map((task) => (
+//             <Task key={task.id} task={task} />
+//         ))}
+//     </div>
+//   )
 }
 
 export default Tasks

@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "task": "task1",
+      "date": "date1",
+      "reminder": true,
+      "id": 1
+    },
+    {
+      "task": "task2",
+      "date": "date2",
+      "reminder": false,
+      "id": 2
+    },
+    {
+      "task": "task3",
+      "date": "date3",
+      "reminder": true,
+      "id": 3
+    }
+  ]
+}
